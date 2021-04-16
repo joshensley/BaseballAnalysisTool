@@ -1,0 +1,69 @@
+﻿@using BaseballAnalysisTool.Utility
+@model PaginatedList<BaseballAnalysisTool.Models.ApplicationUser>
+@{
+    ViewData["Title"] = "User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-6">
+        <a type="button" class="btn btn-primary form-control" asp-area="Identity" asp-page="/Account/Register">
+            Create
+        </a>
+    </div>
+</div>
+
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+           
+            <th scope="col">@Html.DisplayNameFor(model => model[0].FirstName)</th>
+            <th scope="col">@Html.DisplayNameFor(model => model[0].LastName)</th>
+            <th scope="col">@Html.DisplayNameFor(model => model[0].Email)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.FirstName</td>
+                <td>@user.LastName</td>
+                <td>@user.Email</td>
+                <td>
+                    <a asp-action="Index" type="button" class="btn btn-success">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a asp-action="Index" type="button" class="btn btn-success">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+
+        
+
+    </tbody>
+</table>
+
+
+@{ 
+    var previousDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   class="btn btn-primary @previousDisabled">
+    Previous
+</a>
+
+<a asp-action="Index"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   class="btn btn-primary @nextDisabled">
+    Next
+</a>
