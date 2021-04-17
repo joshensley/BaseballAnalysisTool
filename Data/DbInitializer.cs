@@ -1,4 +1,6 @@
-﻿using BaseballAnalysisTool.Models;
+﻿using BaseballAnalysisTool.Areas.Admin.Models;
+using BaseballAnalysisTool.Data.SeedData;
+using BaseballAnalysisTool.Models;
 using BaseballAnalysisTool.Utility;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -60,6 +62,24 @@ namespace BaseballAnalysisTool.Data
             ApplicationUser user = await _db.Users.FirstOrDefaultAsync(u => u.Email == "admin@gmail.com");
 
             _userManager.AddToRoleAsync(user, SD.AdminEndUser).GetAwaiter().GetResult();
+
+            // Seed Countries in Database
+            await _db.Country.AddRangeAsync(CountrySeedData.GetData());
+            await _db.SaveChangesAsync();
+
+
+            // Seed States/Provinces in Database
+            await _db.StateOrProvinces.AddRangeAsync(StateOrProvinceSeedData.GetData());
+            await _db.SaveChangesAsync();
+
+            // Seed Baseball Leagues in Database
+            if (_db.BaseballLeagues.Any()) return;
+            await _db.BaseballLeagues.AddRangeAsync(BaseballLeagueSeedData.GetData());
+            await _db.SaveChangesAsync();
+
+            // Seed Baseball Divisions in Database
+            BaseballDivisionsSeedData.GetData(_db);
+            
 
         }
     }

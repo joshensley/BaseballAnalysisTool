@@ -4,59 +4,22 @@ using BaseballAnalysisTool.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BaseballAnalysisTool.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210416165247_AddedCountryModelToDb")]
+    partial class AddedCountryModelToDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.5")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("BaseballAnalysisTool.Areas.Admin.Models.BaseballDivision", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("BaseballLeagueID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("BaseballLeagueID");
-
-                    b.ToTable("BaseballDivisions");
-                });
-
-            modelBuilder.Entity("BaseballAnalysisTool.Areas.Admin.Models.BaseballLeague", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("BaseballLeagues");
-                });
 
             modelBuilder.Entity("BaseballAnalysisTool.Areas.Admin.Models.Country", b =>
                 {
@@ -73,23 +36,6 @@ namespace BaseballAnalysisTool.Data.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Country");
-                });
-
-            modelBuilder.Entity("BaseballAnalysisTool.Areas.Admin.Models.StateOrProvince", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("StateOrProvinces");
                 });
 
             modelBuilder.Entity("BaseballAnalysisTool.Models.ApplicationUser", b =>
@@ -298,17 +244,6 @@ namespace BaseballAnalysisTool.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("BaseballAnalysisTool.Areas.Admin.Models.BaseballDivision", b =>
-                {
-                    b.HasOne("BaseballAnalysisTool.Areas.Admin.Models.BaseballLeague", "BaseballLeague")
-                        .WithMany("BaseballDivisions")
-                        .HasForeignKey("BaseballLeagueID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("BaseballLeague");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -358,11 +293,6 @@ namespace BaseballAnalysisTool.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("BaseballAnalysisTool.Areas.Admin.Models.BaseballLeague", b =>
-                {
-                    b.Navigation("BaseballDivisions");
                 });
 #pragma warning restore 612, 618
         }
