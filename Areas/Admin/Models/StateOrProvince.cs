@@ -14,5 +14,7 @@ namespace BaseballAnalysisTool.Areas.Admin.Models
         [Display(Name = "State/Province")]
         [MaxLength(256)]
         public string Name { get; set; }
+
+        public ICollection<BaseballTeam> BaseballTeams { get; set; }
     }
 }

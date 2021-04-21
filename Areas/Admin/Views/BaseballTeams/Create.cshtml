@@ -1,0 +1,65 @@
+﻿@model BaseballAnalysisTool.Areas.Admin.Models.BaseballTeam
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>BaseballTeam</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Location" class="control-label"></label>
+                <input asp-for="Location" class="form-control" />
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NickName" class="control-label"></label>
+                <input asp-for="NickName" class="form-control" />
+                <span asp-validation-for="NickName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StadiumName" class="control-label"></label>
+                <input asp-for="StadiumName" class="form-control" />
+                <span asp-validation-for="StadiumName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="City" class="control-label"></label>
+                <input asp-for="City" class="form-control" />
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StateOrProvinceID" class="control-label"></label>
+                <select asp-for="StateOrProvinceID" class ="form-control" asp-items="ViewBag.StateOrProvinceID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="CountryID" class="control-label"></label>
+                <select asp-for="CountryID" class ="form-control" asp-items="ViewBag.CountryID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="BaseballDivisionID" class="control-label"></label>
+                <select asp-for="BaseballDivisionID" class ="form-control" asp-items="ViewBag.BaseballDivisionID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="BaseballLeagueID" class="control-label"></label>
+                <select asp-for="BaseballLeagueID" class ="form-control" asp-items="ViewBag.BaseballLeagueID"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

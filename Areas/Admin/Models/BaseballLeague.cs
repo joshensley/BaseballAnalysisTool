@@ -16,5 +16,6 @@ namespace BaseballAnalysisTool.Areas.Admin.Models
         public string Name { get; set; }
 
         public ICollection<BaseballDivision> BaseballDivisions { get; set; }
+        public ICollection<BaseballTeam> BaseballTeams { get; set; }
     }
 }

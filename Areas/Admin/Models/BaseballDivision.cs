@@ -18,5 +18,7 @@ namespace BaseballAnalysisTool.Areas.Admin.Models
         [Required(ErrorMessage = "Baseball League is Required")]
         public int BaseballLeagueID { get; set; }
         public BaseballLeague BaseballLeague { get; set; }
+
+        public ICollection<BaseballTeam> BaseballTeams { get; set; }
     }
 }

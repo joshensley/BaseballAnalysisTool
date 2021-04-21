@@ -21,6 +21,7 @@ namespace BaseballAnalysisTool.Data
         public DbSet<StateOrProvince> StateOrProvinces { get; set; }
         public DbSet<BaseballLeague> BaseballLeagues { get; set; }
         public DbSet<BaseballDivision> BaseballDivisions { get; set; }
+        public DbSet<BaseballTeam> BaseballTeam { get; set; }
 
     }
 }

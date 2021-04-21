@@ -9,7 +9,7 @@ namespace BaseballAnalysisTool.Data.SeedData
 {
     public class BaseballDivisionsSeedData
     {
-        public async static void GetData(ApplicationDbContext _db)
+        public async static Task GetData(ApplicationDbContext _db)
         {
             int americanLeagueID = (await _db.BaseballLeagues
                 .FirstOrDefaultAsync(x => x.Name == "American League")).ID;
@@ -27,8 +27,8 @@ namespace BaseballAnalysisTool.Data.SeedData
                 new BaseballDivision{Name="National League West",BaseballLeagueID=nationalLeagueID},
             };
 
-            await _db.BaseballDivisions.AddRangeAsync(baseballDivisions);
-            await _db.SaveChangesAsync();
+            _db.BaseballDivisions.AddRange(baseballDivisions);
+            _db.SaveChanges();
 
         }
 

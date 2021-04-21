@@ -64,23 +64,22 @@ namespace BaseballAnalysisTool.Data
             _userManager.AddToRoleAsync(user, SD.AdminEndUser).GetAwaiter().GetResult();
 
             // Seed Countries in Database
-            await _db.Country.AddRangeAsync(CountrySeedData.GetData());
-            await _db.SaveChangesAsync();
-
+            _db.Country.AddRange(CountrySeedData.GetData());
+            _db.SaveChanges();
 
             // Seed States/Provinces in Database
-            await _db.StateOrProvinces.AddRangeAsync(StateOrProvinceSeedData.GetData());
-            await _db.SaveChangesAsync();
+            _db.StateOrProvinces.AddRange(StateOrProvinceSeedData.GetData());
+            _db.SaveChanges();
 
             // Seed Baseball Leagues in Database
-            if (_db.BaseballLeagues.Any()) return;
-            await _db.BaseballLeagues.AddRangeAsync(BaseballLeagueSeedData.GetData());
-            await _db.SaveChangesAsync();
+            _db.BaseballLeagues.AddRange(BaseballLeagueSeedData.GetData());
+            _db.SaveChanges();
 
             // Seed Baseball Divisions in Database
-            BaseballDivisionsSeedData.GetData(_db);
-            
+            await BaseballDivisionsSeedData.GetData(_db);
 
+            // Seed Baseball Teams in Database
+            await BaseballTeamsSeedData.GetData(_db);
         }
     }
 }
